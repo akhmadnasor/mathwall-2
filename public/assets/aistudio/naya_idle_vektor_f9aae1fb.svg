@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="260" height="280" viewBox="0 0 260 280" role="img" aria-label="Karakter insinyur cilik">
+<defs><linearGradient id="hat" x2="0" y2="1"><stop stop-color="#FFF189"/><stop offset="1" stop-color="#F5A528"/></linearGradient><linearGradient id="skin" x2="0" y2="1"><stop stop-color="#FFE5BC"/><stop offset="1" stop-color="#F4B58E"/></linearGradient></defs>
+<!-- backpack and arms -->
+<path d="M79 144Q49 138 49 165v43q20 11 38 -1l4 -58" fill="#61C5BC" stroke="#4F4135" stroke-width="5"/>
+<path d="M76 166q-16 -4 -20 -23l19 -12 19 27" fill="none" stroke="#4C3831" stroke-width="23" stroke-linecap="round"/><path d="M76 166q-16 -4 -20 -23l19 -12 19 27" fill="none" stroke="url(#skin)" stroke-width="17" stroke-linecap="round"/>
+<path d="M165 167q17 -5 20 -24l-20 -10 -18 21" fill="none" stroke="#4C3831" stroke-width="23" stroke-linecap="round"/><path d="M165 167q17 -5 20 -24l-20 -10 -18 21" fill="none" stroke="url(#skin)" stroke-width="17" stroke-linecap="round"/>
+<path d="M103 207l-10 35 28 5 10 -38z" fill="#304D75" stroke="#42372F" stroke-width="4"/><path d="M136 207l2 35 27 3 -6 -39z" fill="#304D75" stroke="#42372F" stroke-width="4"/>
+<path d="M88 238q-21 7 -19 18l57 0q8 -9 -3 -14z" fill="#5D4334" stroke="#3F302A" stroke-width="4"/><path d="M138 239q-5 4 -2 16l54 0q8 -12 -26 -15z" fill="#5D4334" stroke="#3F302A" stroke-width="4"/>
+<rect x="84" y="139" width="87" height="77" rx="22" fill="#9C73E8" stroke="#593F35" stroke-width="5"/>
+<path d="M113 146l8 47 21 0 9 -47" fill="#FFE2AC" stroke="#8D5D45" stroke-width="3"/><path d="M85 200h84" stroke="#73503B" stroke-width="8"/><rect x="116" y="195" width="24" height="15" rx="3" fill="#EFC05A" stroke="#69442E" stroke-width="3"/>
+<path d="M95 136q30 18 58 -1l-16 23q-16 16 -27 0z" fill="#E85090" stroke="#713D38" stroke-width="3"/>
+<path d="M161 86q37 15 15 54l-15 -11z" fill="#473042" stroke="#4C302A" stroke-width="3"/>
+<ellipse cx="128" cy="98" rx="52" ry="55" fill="url(#skin)" stroke="#604536" stroke-width="5"/>
+<path d="M79 92q-15 -52 36 -56q41 -11 57 39q-13 -1 -23 -14q-21 17 -62 18z" fill="#473042"/>
+<path d="M103 81q7 -5 13 0 M138 79q7 -5 13 0" fill="none" stroke="#54392D" stroke-width="4" stroke-linecap="round"/>
+<ellipse cx="109" cy="92" rx="6" ry="9" fill="#2C292C"/><ellipse cx="145" cy="92" rx="6" ry="9" fill="#2C292C"/>
+<ellipse cx="112" cy="89" rx="2" ry="3" fill="white"/><ellipse cx="147" cy="89" rx="2" ry="3" fill="white"/>
+<ellipse cx="92" cy="108" rx="10" ry="6" fill="#F08A8A" opacity=".5"/><ellipse cx="163" cy="108" rx="10" ry="6" fill="#F08A8A" opacity=".5"/>
+<path d="M117 109q11 12 22 -1" fill="none" stroke="#9B4D43" stroke-width="4" stroke-linecap="round"/>
+<!-- helmet -->
+<path d="M74 72Q73 12 126 15q54 0 57 54v9H73z" fill="url(#hat)" stroke="#6F482D" stroke-width="5"/>
+<path d="M122 17v52" stroke="#DB8F28" stroke-width="8"/><path d="M86 49h85" stroke="#FFF1A4" stroke-width="6"/>
+<path d="M64 76q59 -13 127 0q3 13 -9 18q-53 -12 -104 0q-17 -4 -14 -18z" fill="#E9A92F" stroke="#70452B" stroke-width="5"/>
+<rect x="94" y="48" width="64" height="19" rx="10" fill="#465A67" stroke="#453C35" stroke-width="4"/>
+<circle cx="109" cy="57" r="10" fill="#78D8E8" stroke="#2C4450" stroke-width="4"/><circle cx="144" cy="57" r="10" fill="#78D8E8" stroke="#2C4450" stroke-width="4"/>
+
+</svg>

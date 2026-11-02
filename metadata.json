@@ -1,0 +1,6 @@
+{
+  "name": "MATWALL — Mathematics Interactive Wordwall",
+  "description": "Multimedia Pembelajaran Interaktif Matematika Kelas V SD (Kurikulum Merdeka Fase C Semester 1) berbasis Project Based Learning (PjBL) untuk materi Bilangan Pecahan.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

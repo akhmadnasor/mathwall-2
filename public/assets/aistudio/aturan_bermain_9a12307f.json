@@ -1,0 +1,952 @@
+{
+  "schema_version": "1.0.0",
+  "game": {
+    "id": "sakti_bridge_builder_pecahan",
+    "judul": "Bridge Builder Pecahan",
+    "bahasa": "id-ID",
+    "platform": "web-mobile-desktop",
+    "sasaran": "SD kelas 4–5, dapat disesuaikan",
+    "usia": "9–12 tahun",
+    "mata_pelajaran": "Matematika",
+    "materi": [
+      "rasio",
+      "penjumlahan pecahan",
+      "pengurangan pecahan"
+    ],
+    "target_pembelajaran": [
+      "Menginterpretasikan pecahan sebagai bagian dari satu panjang utuh.",
+      "Menyusun rasio dari jumlah papan berwarna.",
+      "Menjumlahkan pecahan dan menguji kesetaraan nilai.",
+      "Mengurangi pecahan dengan melepas papan dan mengamati sisa."
+    ],
+    "orientasi": "edukatif; tanpa hukuman waktu; ramah layar sentuh"
+  },
+  "tampilan": {
+    "rasio_aspek_dasar": "16:9",
+    "viewport_desain_px": {
+      "lebar": 1280,
+      "tinggi": 720
+    },
+    "panjang_satu_jembatan_utuh_px": 720,
+    "representasi_papan": {
+      "1/1": 720,
+      "1/2": 360,
+      "1/3": 240,
+      "1/4": 180,
+      "1/5": 144,
+      "1/6": 120,
+      "1/8": 90
+    },
+    "aturan_ukuran": "Lebar layar boleh diskalakan dengan faktor yang sama untuk semua papan. Jangan samakan lebar 1/2 dengan 1/4. Jangan hitung keberhasilan dari piksel; gunakan pecahan eksak.",
+    "asset_root": "./",
+    "latar": {
+      "rasio_penjumlahan": "lingkungan/latar_sungai.png",
+      "pengurangan_akhir": "lingkungan/latar_air_terjun.png"
+    },
+    "karakter_default": "karakter/utama_3d/adit_builder_3d.png"
+  },
+  "cara_bermain": [
+    {
+      "urutan": 1,
+      "aksi": "pilih_karakter",
+      "teks": "Pilih Adit atau Naya sebagai pembangun."
+    },
+    {
+      "urutan": 2,
+      "aksi": "pilih_level",
+      "teks": "Mulai dari level 1; selanjutnya dibuka setelah misi benar."
+    },
+    {
+      "urutan": 3,
+      "aksi": "baca_misi",
+      "teks": "Baca misi dan perhatikan angka atau rasio target."
+    },
+    {
+      "urutan": 4,
+      "aksi": "susun_atau_hapus",
+      "teks": "Seret/ketuk papan ke posisi jembatan, atau ketuk papan untuk mengurangi."
+    },
+    {
+      "urutan": 5,
+      "aksi": "periksa",
+      "teks": "Tekan tombol Cek Jawaban; penilaian memakai aritmetika pecahan eksak."
+    },
+    {
+      "urutan": 6,
+      "aksi": "lanjut",
+      "teks": "Jika benar, jembatan selesai, karakter menyeberang, dan bintang diberikan."
+    }
+  ],
+  "kontrol": {
+    "desktop": [
+      "drag-and-drop",
+      "klik_papan",
+      "tombol_undo",
+      "tombol_reset",
+      "cek_jawaban",
+      "petunjuk",
+      "jeda"
+    ],
+    "mobile": [
+      "sentuh_papan_lalu_slot",
+      "drag-and-drop",
+      "tombol_besar_min_44px",
+      "undo",
+      "reset",
+      "cek_jawaban"
+    ],
+    "aksesibilitas": {
+      "tidak_wajib_drag": true,
+      "teks_sesuai_pembaca_layar": true,
+      "narasi_pecahan": true,
+      "opsi_matikan_animasi": true,
+      "opsi_matikan_audio": true,
+      "warna_rasio_selalu_disertai_label_teks": true,
+      "mode_tanpa_batas_waktu": true
+    }
+  },
+  "mode": {
+    "susun_rasio": {
+      "instruksi": "Gunakan papan merah dan biru berdasarkan jumlah wajib; panjang total mencapai 1 utuh.",
+      "aturan_validasi": [
+        "jumlah_merah == jumlah_wajib.merah",
+        "jumlah_biru == jumlah_wajib.biru",
+        "jumlah_merah * rasio_target.biru == jumlah_biru * rasio_target.merah",
+        "total_semua_papan == 1"
+      ],
+      "catatan": "Rasio misalnya 1:2 dapat diwakili 2 merah dan 4 biru; validasi jumlah wajib menjaga panjang tepat 1 utuh."
+    },
+    "susun_per_kelompok": {
+      "instruksi": "Setiap suku penjumlahan memiliki daerah penyusunan terpisah. Isi setiap kelompok sesuai nilai suku; jembatan gabungan sepanjang hasil operasi.",
+      "aturan_validasi": [
+        "tiap_kelompok.total_pecahan == suku_terkait",
+        "gabungan_seluruh_kelompok == target_panjang",
+        "jumlah_papan_terpakai_per_jenis <= inventaris_per_jenis"
+      ],
+      "equivalent_fractions_allowed": true
+    },
+    "hapus_papan": {
+      "instruksi": "Awalnya tampil jembatan yang terdiri dari papan satuan dengan nilai sama. Ketuk beberapa papan untuk membongkar bagian yang dikurangi.",
+      "aturan_validasi": [
+        "indeks_papan_terhapus_unik",
+        "0 <= indeks_papan_terhapus < jumlah_papan_awal",
+        "jumlah_pecahan_terhapus == operasi.dikurangi",
+        "jumlah_pecahan_tersisa == operasi.hasil"
+      ],
+      "setelah_berhasil": "Tata ulang papan tersisa ke area target sehingga karakter bisa menyeberang."
+    }
+  },
+  "matematika": {
+    "representasi": "pecahan eksak berupa pasangan integer pembilang dan penyebut, penyebut > 0",
+    "perkalian_silang": "a/b == c/d apabila a*d == c*b",
+    "penjumlahan": "(a/b)+(c/d)=(a*d+c*b)/(b*d)",
+    "pengurangan": "(a/b)-(c/d)=(a*d-c*b)/(b*d)",
+    "rasio": "r:b = jumlahMerah:jumlahBiru bila jumlahMerah*b == jumlahBiru*r dan total papan sesuai panjang target",
+    "sederhanakan": "Bagi pembilang dan penyebut dengan FPB; penyebut selalu positif.",
+    "larangan": "Jangan gunakan pembandingan float, pembulatan, atau hanya lebar gambar sebagai sumber kebenaran."
+  },
+  "umpan_balik": {
+    "benar": {
+      "teks": "Hebat! Jembatanmu tepat. Ayo menyeberang!",
+      "animasi": "kilau_bintang, karakter maju, peti terbuka",
+      "suara": "audio/benar.wav"
+    },
+    "salah": {
+      "teks": "Belum tepat. Hitung kembali jumlah dan panjang papanmu, ya!",
+      "animasi": "goyang_lembut_pada_papan",
+      "suara": "audio/salah.wav",
+      "hukuman": "Tidak ada kehilangan nyawa."
+    },
+    "kelebihan_panjang": "Papan melewati target. Coba kurangi satu papan.",
+    "kurang_panjang": "Jembatan belum mencapai target. Tambahkan papan yang sesuai.",
+    "rasio_salah": "Periksa banyak papan merah dibandingkan papan biru.",
+    "kelompok_salah": "Periksa hasil setiap suku pecahan sebelum menggabungkan jembatan.",
+    "pengurangan_salah": "Bandingkan jumlah papan yang dilepas dengan pecahan pengurangnya."
+  },
+  "penilaian": {
+    "percobaan_dihitung": "Hanya ketika Cek Jawaban ditekan; memindah atau membatalkan papan tidak mengurangi skor.",
+    "bintang": {
+      "3": "jawaban benar; salah 0 kali; petunjuk 0 kali",
+      "2": "jawaban benar; salah <= 1 kali; petunjuk <= 1 kali, tetapi bukan kategori 3 bintang",
+      "1": "jawaban benar dengan jumlah salah/petunjuk lebih tinggi"
+    },
+    "skor": {
+      "1_bintang": 100,
+      "2_bintang": 200,
+      "3_bintang": 300
+    },
+    "buka_level_berikutnya": "Level sebelumnya telah berhasil; bintang berapa pun membuka level berikutnya.",
+    "nyawa": "tak terbatas",
+    "timer": "nonaktif"
+  },
+  "state": {
+    "awal": "pilih_karakter",
+    "transisi": [
+      "pilih_karakter -> pilih_level",
+      "pilih_level -> tampilkan_misi",
+      "tampilkan_misi -> menyusun_atau_menghapus",
+      "menyusun_atau_menghapus -> memeriksa",
+      "memeriksa -> menyusun_atau_menghapus (salah)",
+      "memeriksa -> animasi_menyeberang (benar)",
+      "animasi_menyeberang -> hadiah -> pilih_level"
+    ],
+    "state_per_level": [
+      "inventaris_tersisa",
+      "papan_terpilih",
+      "papan_per_kelompok",
+      "indeks_papan_terhapus",
+      "salah_count",
+      "hint_count",
+      "selesai",
+      "jumlah_bintang"
+    ],
+    "simpan_progres": {
+      "tempat": "localStorage",
+      "key": "sakti_bridge_builder_pecahan_v1",
+      "database_online": "belum dihubungkan ke Supabase",
+      "field": [
+        "karakter",
+        "level_terbuka",
+        "bintang_per_level",
+        "total_skor",
+        "pengaturan_audio"
+      ]
+    }
+  },
+  "asset_mapping": {
+    "karakter_laki_laki": "karakter/utama_3d/adit_builder_3d.png",
+    "karakter_perempuan": "karakter/utama_3d/naya_builder_3d.png",
+    "mentor": "karakter/utama_3d/profesor_mentor_3d.png",
+    "rintangan": "karakter/utama_3d/batu_rintangan_3d.png",
+    "tebing_kiri": "lingkungan/tebing_kiri.png",
+    "tebing_kanan": "lingkungan/tebing_kanan.png",
+    "penyangga_kayu": "jembatan/struktur/tiang_penyangga_kayu.png",
+    "pagar_tali": "jembatan/struktur/pagar_tali.png",
+    "target": "jembatan/struktur/penanda_target_jembatan.png",
+    "bendera": "item_hadiah/bendera_finishing.png",
+    "peti": "item_hadiah/peti_harta.png",
+    "bintang": "item_hadiah/bintang_emas.png",
+    "cek": "ui/tombol/tombol_cek.png",
+    "petunjuk": "ui/tombol/tombol_petunjuk.png",
+    "reset": "ui/tombol/tombol_reset.png"
+  },
+  "levels": [
+    {
+      "level": 1,
+      "materi": "rasio",
+      "mode": "susun_rasio",
+      "judul": "Rasio Merah-Biru",
+      "instruksi": "Mulailah dari rasio 2 : 3. Susun dua papan merah dan tiga papan biru.",
+      "rasio_target": {
+        "merah": 2,
+        "biru": 3
+      },
+      "jumlah_wajib": {
+        "merah": 2,
+        "biru": 3
+      },
+      "ukuran_setiap_papan": {
+        "pembilang": 1,
+        "penyebut": 5
+      },
+      "inventaris": [
+        {
+          "warna": "merah",
+          "aset": "jembatan/papan_rasio/papan_merah_1_5.png",
+          "jumlah": 3,
+          "pecahan": {
+            "pembilang": 1,
+            "penyebut": 5
+          }
+        },
+        {
+          "warna": "biru",
+          "aset": "jembatan/papan_rasio/papan_biru_1_5.png",
+          "jumlah": 4,
+          "pecahan": {
+            "pembilang": 1,
+            "penyebut": 5
+          }
+        }
+      ],
+      "target_panjang": {
+        "pembilang": 1,
+        "penyebut": 1
+      },
+      "petunjuk": "Perbandingan merah:biru adalah 2:3. Pilih 2 merah dan 3 biru; panjang penuh adalah 5/5.",
+      "scene": "latar_sungai"
+    },
+    {
+      "level": 2,
+      "materi": "rasio",
+      "mode": "susun_rasio",
+      "judul": "Jembatan Kembar",
+      "instruksi": "Dua papan merah berpasangan dengan empat papan biru, yaitu 1 : 2.",
+      "rasio_target": {
+        "merah": 1,
+        "biru": 2
+      },
+      "jumlah_wajib": {
+        "merah": 2,
+        "biru": 4
+      },
+      "ukuran_setiap_papan": {
+        "pembilang": 1,
+        "penyebut": 6
+      },
+      "inventaris": [
+        {
+          "warna": "merah",
+          "aset": "jembatan/papan_rasio/papan_merah_1_6.png",
+          "jumlah": 3,
+          "pecahan": {
+            "pembilang": 1,
+            "penyebut": 6
+          }
+        },
+        {
+          "warna": "biru",
+          "aset": "jembatan/papan_rasio/papan_biru_1_6.png",
+          "jumlah": 5,
+          "pecahan": {
+            "pembilang": 1,
+            "penyebut": 6
+          }
+        }
+      ],
+      "target_panjang": {
+        "pembilang": 1,
+        "penyebut": 1
+      },
+      "petunjuk": "Perbandingan merah:biru adalah 1:2. Pilih 2 merah dan 4 biru; panjang penuh adalah 6/6.",
+      "scene": "latar_sungai"
+    },
+    {
+      "level": 3,
+      "materi": "rasio",
+      "mode": "susun_rasio",
+      "judul": "Misi 3 Banding 2",
+      "instruksi": "Bangun jembatan dengan tiga papan merah dan dua papan biru.",
+      "rasio_target": {
+        "merah": 3,
+        "biru": 2
+      },
+      "jumlah_wajib": {
+        "merah": 3,
+        "biru": 2
+      },
+      "ukuran_setiap_papan": {
+        "pembilang": 1,
+        "penyebut": 5
+      },
+      "inventaris": [
+        {
+          "warna": "merah",
+          "aset": "jembatan/papan_rasio/papan_merah_1_5.png",
+          "jumlah": 4,
+          "pecahan": {
+            "pembilang": 1,
+            "penyebut": 5
+          }
+        },
+        {
+          "warna": "biru",
+          "aset": "jembatan/papan_rasio/papan_biru_1_5.png",
+          "jumlah": 3,
+          "pecahan": {
+            "pembilang": 1,
+            "penyebut": 5
+          }
+        }
+      ],
+      "target_panjang": {
+        "pembilang": 1,
+        "penyebut": 1
+      },
+      "petunjuk": "Perbandingan merah:biru adalah 3:2. Pilih 3 merah dan 2 biru; panjang penuh adalah 5/5.",
+      "scene": "latar_sungai"
+    },
+    {
+      "level": 4,
+      "materi": "penjumlahan",
+      "mode": "susun_per_kelompok",
+      "judul": "Dua Bagian Jembatan",
+      "instruksi": "Gabungkan 1/2 dan 1/4 menjadi 3/4.",
+      "operasi": {
+        "jenis": "tambah",
+        "suku": [
+          {
+            "pembilang": 1,
+            "penyebut": 2
+          },
+          {
+            "pembilang": 1,
+            "penyebut": 4
+          }
+        ],
+        "hasil": {
+          "pembilang": 3,
+          "penyebut": 4
+        }
+      },
+      "kelompok_penyusun": [
+        {
+          "label": "Suku 1",
+          "nilai": {
+            "pembilang": 1,
+            "penyebut": 2
+          },
+          "pilihan_papan": [
+            {
+              "aset": "jembatan/papan_pecahan/papan_1_2.png",
+              "pecahan": {
+                "pembilang": 1,
+                "penyebut": 2
+              },
+              "jumlah": 1
+            }
+          ]
+        },
+        {
+          "label": "Suku 2",
+          "nilai": {
+            "pembilang": 1,
+            "penyebut": 4
+          },
+          "pilihan_papan": [
+            {
+              "aset": "jembatan/papan_pecahan/papan_1_4.png",
+              "pecahan": {
+                "pembilang": 1,
+                "penyebut": 4
+              },
+              "jumlah": 1
+            }
+          ]
+        }
+      ],
+      "inventaris": [
+        {
+          "aset": "jembatan/papan_pecahan/papan_1_2.png",
+          "jumlah": 1,
+          "pecahan": {
+            "pembilang": 1,
+            "penyebut": 2
+          }
+        },
+        {
+          "aset": "jembatan/papan_pecahan/papan_1_4.png",
+          "jumlah": 2,
+          "pecahan": {
+            "pembilang": 1,
+            "penyebut": 4
+          }
+        },
+        {
+          "aset": "jembatan/papan_pecahan/papan_1_6.png",
+          "jumlah": 1,
+          "pecahan": {
+            "pembilang": 1,
+            "penyebut": 6
+          }
+        }
+      ],
+      "target_panjang": {
+        "pembilang": 3,
+        "penyebut": 4
+      },
+      "petunjuk": "Samakan penyebut jika perlu. Susun setiap suku pada kelompoknya masing-masing, lalu gabungkan panjangnya.",
+      "scene": "latar_sungai"
+    },
+    {
+      "level": 5,
+      "materi": "penjumlahan",
+      "mode": "susun_per_kelompok",
+      "judul": "Jembatan Setengah",
+      "instruksi": "Gabungkan 1/3 dan 1/6 menjadi 1/2.",
+      "operasi": {
+        "jenis": "tambah",
+        "suku": [
+          {
+            "pembilang": 1,
+            "penyebut": 3
+          },
+          {
+            "pembilang": 1,
+            "penyebut": 6
+          }
+        ],
+        "hasil": {
+          "pembilang": 1,
+          "penyebut": 2
+        }
+      },
+      "kelompok_penyusun": [
+        {
+          "label": "Suku 1",
+          "nilai": {
+            "pembilang": 1,
+            "penyebut": 3
+          },
+          "pilihan_papan": [
+            {
+              "aset": "jembatan/papan_pecahan/papan_1_3.png",
+              "pecahan": {
+                "pembilang": 1,
+                "penyebut": 3
+              },
+              "jumlah": 1
+            }
+          ]
+        },
+        {
+          "label": "Suku 2",
+          "nilai": {
+            "pembilang": 1,
+            "penyebut": 6
+          },
+          "pilihan_papan": [
+            {
+              "aset": "jembatan/papan_pecahan/papan_1_6.png",
+              "pecahan": {
+                "pembilang": 1,
+                "penyebut": 6
+              },
+              "jumlah": 1
+            }
+          ]
+        }
+      ],
+      "inventaris": [
+        {
+          "aset": "jembatan/papan_pecahan/papan_1_3.png",
+          "jumlah": 1,
+          "pecahan": {
+            "pembilang": 1,
+            "penyebut": 3
+          }
+        },
+        {
+          "aset": "jembatan/papan_pecahan/papan_1_6.png",
+          "jumlah": 3,
+          "pecahan": {
+            "pembilang": 1,
+            "penyebut": 6
+          }
+        },
+        {
+          "aset": "jembatan/papan_pecahan/papan_1_4.png",
+          "jumlah": 1,
+          "pecahan": {
+            "pembilang": 1,
+            "penyebut": 4
+          }
+        }
+      ],
+      "target_panjang": {
+        "pembilang": 1,
+        "penyebut": 2
+      },
+      "petunjuk": "Samakan penyebut jika perlu. Susun setiap suku pada kelompoknya masing-masing, lalu gabungkan panjangnya.",
+      "scene": "latar_sungai"
+    },
+    {
+      "level": 6,
+      "materi": "penjumlahan",
+      "mode": "susun_per_kelompok",
+      "judul": "Jembatan Utuh",
+      "instruksi": "Tiga kelompok pecahan akan membangun satu jembatan utuh.",
+      "operasi": {
+        "jenis": "tambah",
+        "suku": [
+          {
+            "pembilang": 1,
+            "penyebut": 4
+          },
+          {
+            "pembilang": 1,
+            "penyebut": 4
+          },
+          {
+            "pembilang": 1,
+            "penyebut": 2
+          }
+        ],
+        "hasil": {
+          "pembilang": 1,
+          "penyebut": 1
+        }
+      },
+      "kelompok_penyusun": [
+        {
+          "label": "Suku 1",
+          "nilai": {
+            "pembilang": 1,
+            "penyebut": 4
+          },
+          "pilihan_papan": [
+            {
+              "aset": "jembatan/papan_pecahan/papan_1_4.png",
+              "pecahan": {
+                "pembilang": 1,
+                "penyebut": 4
+              },
+              "jumlah": 1
+            }
+          ]
+        },
+        {
+          "label": "Suku 2",
+          "nilai": {
+            "pembilang": 1,
+            "penyebut": 4
+          },
+          "pilihan_papan": [
+            {
+              "aset": "jembatan/papan_pecahan/papan_1_4.png",
+              "pecahan": {
+                "pembilang": 1,
+                "penyebut": 4
+              },
+              "jumlah": 1
+            }
+          ]
+        },
+        {
+          "label": "Suku 3",
+          "nilai": {
+            "pembilang": 1,
+            "penyebut": 2
+          },
+          "pilihan_papan": [
+            {
+              "aset": "jembatan/papan_pecahan/papan_1_2.png",
+              "pecahan": {
+                "pembilang": 1,
+                "penyebut": 2
+              },
+              "jumlah": 1
+            }
+          ]
+        }
+      ],
+      "inventaris": [
+        {
+          "aset": "jembatan/papan_pecahan/papan_1_4.png",
+          "jumlah": 3,
+          "pecahan": {
+            "pembilang": 1,
+            "penyebut": 4
+          }
+        },
+        {
+          "aset": "jembatan/papan_pecahan/papan_1_2.png",
+          "jumlah": 1,
+          "pecahan": {
+            "pembilang": 1,
+            "penyebut": 2
+          }
+        },
+        {
+          "aset": "jembatan/papan_pecahan/papan_1_3.png",
+          "jumlah": 1,
+          "pecahan": {
+            "pembilang": 1,
+            "penyebut": 3
+          }
+        },
+        {
+          "aset": "jembatan/papan_pecahan/papan_1_6.png",
+          "jumlah": 1,
+          "pecahan": {
+            "pembilang": 1,
+            "penyebut": 6
+          }
+        }
+      ],
+      "target_panjang": {
+        "pembilang": 1,
+        "penyebut": 1
+      },
+      "petunjuk": "Samakan penyebut jika perlu. Susun setiap suku pada kelompoknya masing-masing, lalu gabungkan panjangnya.",
+      "scene": "latar_sungai"
+    },
+    {
+      "level": 7,
+      "materi": "penjumlahan",
+      "mode": "susun_per_kelompok",
+      "judul": "Lima per Enam",
+      "instruksi": "Gunakan dua potong 1/3 untuk mewakili 2/3, lalu tambah 1/6.",
+      "operasi": {
+        "jenis": "tambah",
+        "suku": [
+          {
+            "pembilang": 2,
+            "penyebut": 3
+          },
+          {
+            "pembilang": 1,
+            "penyebut": 6
+          }
+        ],
+        "hasil": {
+          "pembilang": 5,
+          "penyebut": 6
+        }
+      },
+      "kelompok_penyusun": [
+        {
+          "label": "Suku 1",
+          "nilai": {
+            "pembilang": 2,
+            "penyebut": 3
+          },
+          "pilihan_papan": [
+            {
+              "aset": "jembatan/papan_pecahan/papan_1_3.png",
+              "pecahan": {
+                "pembilang": 1,
+                "penyebut": 3
+              },
+              "jumlah": 2
+            }
+          ]
+        },
+        {
+          "label": "Suku 2",
+          "nilai": {
+            "pembilang": 1,
+            "penyebut": 6
+          },
+          "pilihan_papan": [
+            {
+              "aset": "jembatan/papan_pecahan/papan_1_6.png",
+              "pecahan": {
+                "pembilang": 1,
+                "penyebut": 6
+              },
+              "jumlah": 1
+            }
+          ]
+        }
+      ],
+      "inventaris": [
+        {
+          "aset": "jembatan/papan_pecahan/papan_1_3.png",
+          "jumlah": 3,
+          "pecahan": {
+            "pembilang": 1,
+            "penyebut": 3
+          }
+        },
+        {
+          "aset": "jembatan/papan_pecahan/papan_1_6.png",
+          "jumlah": 2,
+          "pecahan": {
+            "pembilang": 1,
+            "penyebut": 6
+          }
+        },
+        {
+          "aset": "jembatan/papan_pecahan/papan_1_2.png",
+          "jumlah": 1,
+          "pecahan": {
+            "pembilang": 1,
+            "penyebut": 2
+          }
+        }
+      ],
+      "target_panjang": {
+        "pembilang": 5,
+        "penyebut": 6
+      },
+      "petunjuk": "Samakan penyebut jika perlu. Susun setiap suku pada kelompoknya masing-masing, lalu gabungkan panjangnya.",
+      "scene": "latar_sungai"
+    },
+    {
+      "level": 8,
+      "materi": "pengurangan",
+      "mode": "hapus_papan",
+      "judul": "Jembatan yang Menyusut",
+      "instruksi": "Hapus 2 papan 1/6 dari 5 papan; 3 papan yang tersisa = 1/2.",
+      "operasi": {
+        "jenis": "kurang",
+        "awal": {
+          "pembilang": 5,
+          "penyebut": 6
+        },
+        "dikurangi": {
+          "pembilang": 1,
+          "penyebut": 3
+        },
+        "hasil": {
+          "pembilang": 1,
+          "penyebut": 2
+        }
+      },
+      "jembatan_awal": {
+        "aset": "jembatan/papan_pecahan/papan_1_6.png",
+        "jumlah": 5,
+        "nilai_setiap_papan": {
+          "pembilang": 1,
+          "penyebut": 6
+        }
+      },
+      "jumlah_papan_dihapus": 2,
+      "target_panjang": {
+        "pembilang": 1,
+        "penyebut": 2
+      },
+      "petunjuk": "Ketuk papan pada jembatan awal untuk menguranginya. Periksa nilai bagian yang dihapus dan yang tersisa.",
+      "scene": "latar_sungai"
+    },
+    {
+      "level": 9,
+      "materi": "pengurangan",
+      "mode": "hapus_papan",
+      "judul": "Sisa Seperempat",
+      "instruksi": "Hapus 2 papan 1/4 dari 3 papan; sisanya 1/4.",
+      "operasi": {
+        "jenis": "kurang",
+        "awal": {
+          "pembilang": 3,
+          "penyebut": 4
+        },
+        "dikurangi": {
+          "pembilang": 1,
+          "penyebut": 2
+        },
+        "hasil": {
+          "pembilang": 1,
+          "penyebut": 4
+        }
+      },
+      "jembatan_awal": {
+        "aset": "jembatan/papan_pecahan/papan_1_4.png",
+        "jumlah": 3,
+        "nilai_setiap_papan": {
+          "pembilang": 1,
+          "penyebut": 4
+        }
+      },
+      "jumlah_papan_dihapus": 2,
+      "target_panjang": {
+        "pembilang": 1,
+        "penyebut": 4
+      },
+      "petunjuk": "Ketuk papan pada jembatan awal untuk menguranginya. Periksa nilai bagian yang dihapus dan yang tersisa.",
+      "scene": "latar_sungai"
+    },
+    {
+      "level": 10,
+      "materi": "pengurangan",
+      "mode": "hapus_papan",
+      "judul": "Dua Pertiga Tersisa",
+      "instruksi": "Dari 3 papan 1/3, hapus 1 papan. Sisanya 2/3.",
+      "operasi": {
+        "jenis": "kurang",
+        "awal": {
+          "pembilang": 1,
+          "penyebut": 1
+        },
+        "dikurangi": {
+          "pembilang": 1,
+          "penyebut": 3
+        },
+        "hasil": {
+          "pembilang": 2,
+          "penyebut": 3
+        }
+      },
+      "jembatan_awal": {
+        "aset": "jembatan/papan_pecahan/papan_1_3.png",
+        "jumlah": 3,
+        "nilai_setiap_papan": {
+          "pembilang": 1,
+          "penyebut": 3
+        }
+      },
+      "jumlah_papan_dihapus": 1,
+      "target_panjang": {
+        "pembilang": 2,
+        "penyebut": 3
+      },
+      "petunjuk": "Ketuk papan pada jembatan awal untuk menguranginya. Periksa nilai bagian yang dihapus dan yang tersisa.",
+      "scene": "latar_sungai"
+    },
+    {
+      "level": 11,
+      "materi": "pengurangan",
+      "mode": "hapus_papan",
+      "judul": "Tantangan Delapan",
+      "instruksi": "Dari 7 papan 1/8, hapus 3 papan. Sisanya 4/8 = 1/2.",
+      "operasi": {
+        "jenis": "kurang",
+        "awal": {
+          "pembilang": 7,
+          "penyebut": 8
+        },
+        "dikurangi": {
+          "pembilang": 3,
+          "penyebut": 8
+        },
+        "hasil": {
+          "pembilang": 1,
+          "penyebut": 2
+        }
+      },
+      "jembatan_awal": {
+        "aset": "jembatan/papan_pecahan/papan_1_8.png",
+        "jumlah": 7,
+        "nilai_setiap_papan": {
+          "pembilang": 1,
+          "penyebut": 8
+        }
+      },
+      "jumlah_papan_dihapus": 3,
+      "target_panjang": {
+        "pembilang": 1,
+        "penyebut": 2
+      },
+      "petunjuk": "Ketuk papan pada jembatan awal untuk menguranginya. Periksa nilai bagian yang dihapus dan yang tersisa.",
+      "scene": "latar_air_terjun"
+    },
+    {
+      "level": 12,
+      "materi": "pengurangan",
+      "mode": "hapus_papan",
+      "judul": "Misi Akhir Pahlawan",
+      "instruksi": "Dari 5 papan 1/6, hapus 1 papan. Sisanya 4/6 = 2/3.",
+      "operasi": {
+        "jenis": "kurang",
+        "awal": {
+          "pembilang": 5,
+          "penyebut": 6
+        },
+        "dikurangi": {
+          "pembilang": 1,
+          "penyebut": 6
+        },
+        "hasil": {
+          "pembilang": 2,
+          "penyebut": 3
+        }
+      },
+      "jembatan_awal": {
+        "aset": "jembatan/papan_pecahan/papan_1_6.png",
+        "jumlah": 5,
+        "nilai_setiap_papan": {
+          "pembilang": 1,
+          "penyebut": 6
+        }
+      },
+      "jumlah_papan_dihapus": 1,
+      "target_panjang": {
+        "pembilang": 2,
+        "penyebut": 3
+      },
+      "petunjuk": "Ketuk papan pada jembatan awal untuk menguranginya. Periksa nilai bagian yang dihapus dan yang tersisa.",
+      "scene": "latar_air_terjun"
+    }
+  ]
+}

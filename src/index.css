@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-display: 'Bricolage Grotesque', sans-serif;
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+
+    /* Exact Color Palette from Attached lh3 MATHWALL Artwork */
+    --math-blue: #0066DD;
+    --math-blue-dark: #0044AA;
+    --wall-orange: #FF7A00;
+    --wall-orange-dark: #D94E00;
+    --fraction-lime: #58CC02;
+    --fraction-lime-dark: #3E9400;
+    --sunshine-yellow: #FFD60A;
+    --navy-outline: #082545;
+    --card-sky: #BAE6FD;
+    --card-mint: #BBF7D0;
+    --sd-red: #DC2626;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: #082545;
+    background-color: #FFFDF7;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  .font-mono, .tabular-nums {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Tactile 3D-inspired educational surface classes matching lh3 MATHWALL artwork */
+.surface-3d-card {
+  background: #FFFFFF;
+  border: 2.5px solid #082545;
+  box-shadow: 0 6px 0 #082545, 0 10px 20px -5px rgba(8, 37, 69, 0.12);
+  transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* MATH Royal Blue 3D Button */
+.surface-3d-btn-primary {
+  background: linear-gradient(180deg, #1E88E5 0%, #0066DD 100%);
+  color: #FFFFFF;
+  border: 2.5px solid #082545;
+  box-shadow: 0 5px 0 #082545;
+  transition: transform 120ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 120ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.surface-3d-btn-primary:hover {
+  background: linear-gradient(180deg, #2997FF 0%, #0055BB 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 0 #082545;
+}
+.surface-3d-btn-primary:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #082545;
+}
+
+/* Fraction Bar Lime Green 3D Button */
+.surface-3d-btn-emerald {
+  background: linear-gradient(180deg, #6EE708 0%, #58CC02 100%);
+  color: #082545;
+  border: 2.5px solid #082545;
+  box-shadow: 0 5px 0 #082545;
+  transition: transform 120ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 120ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.surface-3d-btn-emerald:hover {
+  background: linear-gradient(180deg, #7CF218 0%, #4BB300 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 0 #082545;
+}
+.surface-3d-btn-emerald:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #082545;
+}
+
+/* WALL Tangerine Orange 3D Button */
+.surface-3d-btn-amber {
+  background: linear-gradient(180deg, #FF9419 0%, #FF6B00 100%);
+  color: #FFFFFF;
+  border: 2.5px solid #082545;
+  box-shadow: 0 5px 0 #082545;
+  transition: transform 120ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 120ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.surface-3d-btn-amber:hover {
+  background: linear-gradient(180deg, #FFA333 0%, #E65C00 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 0 #082545;
+}
+.surface-3d-btn-amber:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #082545;
+}
+
+/* Crisp White / Cream 3D Neutral Button */
+.surface-3d-btn-neutral {
+  background: #FFFFFF;
+  color: #082545;
+  border: 2.5px solid #082545;
+  box-shadow: 0 4px 0 #082545;
+  transition: transform 120ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 120ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.surface-3d-btn-neutral:hover {
+  background: #FEF9C3;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 0 #082545;
+}
+.surface-3d-btn-neutral:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #082545;
+}
+
+
